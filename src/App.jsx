@@ -37,8 +37,30 @@ const App = () => {
           alt="photo"
         />
       </section>
-      {/* <section className="bg-yellow-300 min-h-[80vh]">
-      </section> */}
+      <section id="about" className="min-h-[60vh] items-center p-12 gap-8 flex flex-col">
+        <h1
+          className="font-bold text-3xl
+        relative after:block after:h-[2px] after:w-3/4 after:bg-blue-500 after:absolute
+        after:left-[12.5%] after:bottom-0"
+        >
+          About
+        </h1>
+        <div className="p-6 flex items-center justify-around">
+          <img
+            src="/photo3.jpg"
+            className="m-6 rounded-full size-72"
+            alt="photo"
+          />
+          <div className="w-1/2 gap-2 flex flex-col">
+            <h2 className="font-semibold text-2xl">I'm Abhay</h2>
+            <p>
+              I'm a computer science major at model engineering college. I excel
+              in web development and machine learning, and have solid
+              foundations in python and java programming.
+            </p>
+          </div>
+        </div>
+      </section>
     </>
   );
 };
