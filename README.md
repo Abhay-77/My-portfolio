@@ -7,3 +7,6 @@ This is my personal portfolio website built to showcase my projects, skills, and
 - [React](https://reactjs.org/)
 - [Vite](https://vitejs.dev/)
 - [Tailwind CSS](https://tailwindcss.com/)
+
+---
+⭐ this project if you like it!
