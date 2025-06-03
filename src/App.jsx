@@ -1,8 +1,9 @@
-import React from "react";
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import { LuGithub } from "react-icons/lu";
 import { FaInstagram } from "react-icons/fa";
 import { CiLinkedin } from "react-icons/ci";
+import clsx from "clsx";
 
 const App = () => {
   const skills = [
@@ -11,6 +12,31 @@ const App = () => {
     "Java programming",
     "Python programming",
   ];
+
+  const [result, setResult] = useState("");
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    setResult("Sending....");
+    const formData = new FormData(event.target);
+
+    formData.append("access_key", import.meta.env.VITE_PUBLIC_ACCESS_KEY);
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      setResult("Message sent.");
+      event.target.reset();
+    } else {
+      setResult("Error sending message.Try again!");
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -80,31 +106,60 @@ const App = () => {
           </h2>
           <ul className="text-lg list-disc p-4">
             {skills.map((skill) => (
-              <li className="">{skill}</li>
+              <li className="" key={skill}>
+                {skill}
+              </li>
             ))}
           </ul>
         </div>
-        <img src="/skills_image.png" className="m-6 rounded-4xl size-96" alt="" />
+        <img
+          src="/skills_image.png"
+          className="m-6 rounded-4xl size-96"
+          alt=""
+        />
       </section>
-      <section id="contact" className="flex flex-col items-center p-12 gap-4">
-        <h2
-          className="relative after:block after:h-[2px] after:w-3/4 after:bg-blue-500
-        after:absolute after:left-[12.5%] after:bottom-0 font-medium text-2xl m-4"
+      <section id="contact" className="flex justify-center p-12">
+        <form
+          onSubmit={onSubmit}
+          method="post"
+          className="flex flex-col w-[30%] gap-4 items-center"
         >
-          Contact
-        </h2>
-        <input
-          type="text"
-          placeholder="Name"
-          className="p-2 rounded w-1/4 border"
-        />
-        <input
-          type="text"
-          placeholder="Email"
-          className="p-2 rounded w-1/4 border"
-        />
-        <textarea placeholder="Message" className="p-2 rounded w-1/4 border h-40" />
-        <button type="submit" className="bg-blue-500 px-6 py-2 rounded-lg">Send</button>
+          <h2
+            className="relative after:block after:h-[2px] after:w-3/4 after:bg-blue-500
+        after:absolute after:left-[12.5%] after:bottom-0 font-medium text-2xl m-4"
+          >
+            Contact
+          </h2>
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            className="p-2 rounded w-full border"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            className="p-2 rounded w-full border"
+            required
+          />
+          <textarea
+            placeholder="Message"
+            name="message"
+            className="p-2 rounded w-full border h-40"
+            required
+          />
+          <span className={clsx("self-start",{
+            "text-red-500" : result.startsWith("Error")
+          })}>{result}</span>
+          <button
+            type="submit"
+            className="bg-blue-500 px-6 py-2 rounded-lg self-start"
+          >
+            Send
+          </button>
+        </form>
       </section>
     </>
   );
