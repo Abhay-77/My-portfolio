@@ -5,6 +5,12 @@ import { FaInstagram } from "react-icons/fa";
 import { CiLinkedin } from "react-icons/ci";
 
 const App = () => {
+  const skills = [
+    "Web development",
+    "Machine learning",
+    "Java programming",
+    "Python programming",
+  ];
   return (
     <>
       <Navbar />
@@ -37,7 +43,10 @@ const App = () => {
           alt="photo"
         />
       </section>
-      <section id="about" className="min-h-[60vh] items-center p-12 gap-8 flex flex-col">
+      <section
+        id="about"
+        className="min-h-[60vh] items-center p-12 gap-8 flex flex-col"
+      >
         <h1
           className="font-bold text-3xl
         relative after:block after:h-[2px] after:w-3/4 after:bg-blue-500 after:absolute
@@ -60,6 +69,42 @@ const App = () => {
             </p>
           </div>
         </div>
+      </section>
+      <section
+        id="skills"
+        className="p-12 gap-8 flex items-center justify-evenly bg-gray-50"
+      >
+        <div className="">
+          <h2 className="font-medium text-xl">
+            I have a variety of skills.The most proficient ones are:
+          </h2>
+          <ul className="text-lg list-disc p-4">
+            {skills.map((skill) => (
+              <li className="">{skill}</li>
+            ))}
+          </ul>
+        </div>
+        <img src="/skills_image.png" className="m-6 rounded-4xl size-96" alt="" />
+      </section>
+      <section id="contact" className="flex flex-col items-center p-12 gap-4">
+        <h2
+          className="relative after:block after:h-[2px] after:w-3/4 after:bg-blue-500
+        after:absolute after:left-[12.5%] after:bottom-0 font-medium text-2xl m-4"
+        >
+          Contact
+        </h2>
+        <input
+          type="text"
+          placeholder="Name"
+          className="p-2 rounded w-1/4 border"
+        />
+        <input
+          type="text"
+          placeholder="Email"
+          className="p-2 rounded w-1/4 border"
+        />
+        <textarea placeholder="Message" className="p-2 rounded w-1/4 border h-40" />
+        <button type="submit" className="bg-blue-500 px-6 py-2 rounded-lg">Send</button>
       </section>
     </>
   );
